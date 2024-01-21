@@ -9,7 +9,8 @@ var eventsInput = []
 var lanesInput
 //set the date
 var date = new Date();
-var now = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate();
+var now = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+var aYearFromNow = (date.getFullYear()+1) + "-" + (date.getMonth() +1) + "-" + date.getDate() //this will pad the end of the timeline by a year
 
 
 //define a getJSON function
@@ -105,12 +106,15 @@ function chartify() {
 
   // Configuration for the Timeline
   const options = {
-    start: '2009-1-28',
+    min: "2008-1-1",
+    max: aYearFromNow,
+    start: '2008-8-1',
     end: now,
     groupOrder: function (a, b) {
       return a.order - b.order
     },
-    stack: true
+    stack: false,
+    timeAxis: {scale: "month", step: 3}
   }
 
   // Create a Timeline
