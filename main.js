@@ -11,7 +11,7 @@ var lanesInput
 var date = new Date();
 var now = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
 var aYearFromNow = (date.getFullYear()+1) + "-" + (date.getMonth() +1) + "-" + date.getDate() //this will pad the end of the timeline by a year
-
+const apikey = import.meta.env.VITE_API_KEY
 
 //define a getJSON function
 var getJSON = function(url, callback) {
@@ -30,7 +30,7 @@ var getJSON = function(url, callback) {
 };
 
   //use getJSON to pull the events google sheet, then convert it to usable
-  getJSON('https://sheets.googleapis.com/v4/spreadsheets/1iF4p6svtqDrIF6Se0mzd6AzS4CZDsKErbuPTs6cxG2I/values/Data?alt=json&key=AIzaSyBgnJnL5V5pPI1lCQFZzSx0Pcqc0MAu6PE',
+  getJSON('https://sheets.googleapis.com/v4/spreadsheets/1iF4p6svtqDrIF6Se0mzd6AzS4CZDsKErbuPTs6cxG2I/values/Data?alt=json&key='+apikey,
     function (err, eventsData) {
       if (err !== null) {
         alert('Something went wrong: ' + err);
@@ -56,7 +56,7 @@ var getJSON = function(url, callback) {
         console.log("Events: ", events)
 
   //use getJSON to pull the ID-Group google sheet, then convert it to usable
-  getJSON('https://sheets.googleapis.com/v4/spreadsheets/1iF4p6svtqDrIF6Se0mzd6AzS4CZDsKErbuPTs6cxG2I/values/ID-Group?alt=json&key=AIzaSyBgnJnL5V5pPI1lCQFZzSx0Pcqc0MAu6PE',
+  getJSON('https://sheets.googleapis.com/v4/spreadsheets/1iF4p6svtqDrIF6Se0mzd6AzS4CZDsKErbuPTs6cxG2I/values/ID-Group?alt=json&key='+apikey,
     function (err, lanesData) {
       if (err !== null) {
         alert('Something went wrong: ' + err);
