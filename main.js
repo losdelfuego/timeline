@@ -50,7 +50,11 @@ var getJSON = function(url, callback) {
             item[headers[j]] = inputItem[j]; // for each string in the header create and assign a property to the temp item
           }
           if (!item.className) { item.className = item.group.replace(/\s+/g, '') } //add a className if it doesn't exist
-          item.title = item.content //set the tooltip to the main info
+          var startDate = new Date(item.start)
+          var startDateString = startDate.toLocaleDateString()
+          var endDate = new Date(item.end)
+          var endDateString = endDate.toLocaleDateString()
+          item.title = item.content + " (" + startDateString + " - " + endDateString +")" //set the tooltip to the main info plus dates
           events.push(item); // add the temp item to the output array
         }
         console.log("Events: ", events)
@@ -114,7 +118,8 @@ function chartify() {
       return a.order - b.order
     },
     stack: false,
-    timeAxis: {scale: "month", step: 3}
+    // timeAxis: {scale: "month", step: 3}
+
   }
 
   // Create a Timeline
