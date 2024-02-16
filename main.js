@@ -1,5 +1,5 @@
 
-import {DataSet, Timeline} from "vis-timeline/standalone";
+import { Timeline, DataSet } from "vis-timeline/standalone";
 import "vis-timeline/styles/vis-timeline-graph2d.css";
 // import sheetdb from 'sheetdb-node';
 
@@ -9,8 +9,16 @@ var eventsInput = []
 var lanesInput
 //set the date
 var date = new Date();
-var now = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-var aYearFromNow = (date.getFullYear()+1) + "-" + (date.getMonth() +1) + "-" + date.getDate() //this will pad the end of the timeline by a year
+// var now = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+var now = new Date().toISOString().substring(0, 10);
+
+var nextYear = (date.getFullYear() + 1)
+console.log("Next Year: ", nextYear)
+var dateWithoutYear = now.slice(4)
+console.log("Date Without Year: ", dateWithoutYear)
+var aYearFromNow = nextYear + dateWithoutYear //this will pad the end of the timeline by a year
+console.log("now:", now)
+console.log("a year from now: ", aYearFromNow)
 const apikey = import.meta.env.VITE_API_KEY
 
 //define a getJSON function
@@ -99,6 +107,7 @@ var getJSON = function(url, callback) {
 
 function chartify() {
 
+
   // DOM element where the Timeline will be attached
   const container = document.getElementById("visualization");
 
@@ -110,9 +119,9 @@ function chartify() {
 
   // Configuration for the Timeline
   const options = {
-    min: "2008-1-1",
+    min: "2008-01-01",
     max: aYearFromNow,
-    start: '2008-8-1',
+    start: "2008-08-01",
     end: now,
     groupOrder: function (a, b) {
       return a.order - b.order
